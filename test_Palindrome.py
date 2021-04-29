@@ -3,6 +3,18 @@ from Palindrome import *
 
 
 class Test(TestCase):
+
+    def test_cleanup_string(self):
+        self.assertEqual("", cleanup_string(""))
+        self.assertEqual("a", cleanup_string("a"))
+        self.assertEqual("abcde", cleanup_string("abcde"))
+        self.assertEqual("abcde", cleanup_string("123a b c d e#$% @:;"))
+        with self.assertRaises(TypeError):
+            cleanup_string()
+
+        with self.assertRaises(TypeError):
+            cleanup_string(121)
+
     def test_is_palindrome(self):
         # ----- palindromes -----
         # single character
@@ -34,7 +46,7 @@ class Test(TestCase):
         # string with spaces
         self.assertEqual(False, is_palindrome("nurses run xxx"))
         # string with special characters
-        self.assertEqual(False, is_palindrome('Al lets Della call Ed "Stella xxx."'))
+        self.assertEqual(False, is_palindrome('Al lets Della call Ed "Stella xx246."'))
         # very long string
         self.assertEqual(False,
                          is_palindrome('Dennis, Nell, Edna, Leon, Nedra, Anita, Rolf, Nora, Alice, Carol, Leo, Jane, '
@@ -43,8 +55,8 @@ class Test(TestCase):
                                        'Arne, Bette, Dan, Reba, Diane, Lynn, Ed, Eva, Dana, Lynne, Pearl, Isabel, '
                                        'Ada, Ned, Dee, Rena, Joel, Lora, Cecil, Aaron, Flora, Tina, Arden, Noel, '
                                        'and Ellen sinned xxx.'))
-        # no alphanumeric characters
-        self.assertEqual(False, is_palindrome("!#$%&@"))
+        # no alphabet characters
+        self.assertEqual(False, is_palindrome("!#$%&@246"))
 
         # ----- invalid inputs -----
         with self.assertRaises(TypeError):
@@ -68,15 +80,15 @@ class Test(TestCase):
         # palindromic string
         self.assertEqual("ursesru", get_longest_palindromic_substr("nurses run"))
         # palindromic string with special characters
-        self.assertEqual('lletsDellacallEdStell', get_longest_palindromic_substr('Al lets Della call Ed "Stella."'))
+        self.assertEqual('lletsdellacalledstell', get_longest_palindromic_substr('Al lets Della call Ed "Stella."'))
 
         # ----- without palindromic substring -----
         # empty string
         self.assertEqual("", get_longest_palindromic_substr(""))
         # single-character string
         self.assertEqual("", get_longest_palindromic_substr("a"))
-        # non-alphanumeric string
-        self.assertEqual("", get_longest_palindromic_substr("!#$%&@"))
+        # non-alphabet string
+        self.assertEqual("", get_longest_palindromic_substr("!#$%&@246"))
 
         # ----- invalid inputs -----
         with self.assertRaises(TypeError):
@@ -103,8 +115,8 @@ class Test(TestCase):
         # ----- Cannot be divided where all substrings are palindromic -----
         # empty string
         self.assertEqual(0, get_min_palindromic_split(""))
-        # string is not alphanumeric
-        self.assertEqual(0, get_min_palindromic_split("!#$%&@"))
+        # string is not alphabet
+        self.assertEqual(0, get_min_palindromic_split("!#$%&@246"))
 
         # ----- invalid inputs -----
         with self.assertRaises(TypeError):
