@@ -1,0 +1,8 @@
+Execution
+from the root directory, execute:
+
+    python -m unittest test_Palindrome.py
+
+Online deployment: 
+1. Go to: https://replit.com/@RexieMercado/SSE#.replit
+2. Click ">" (Play/Run) button
